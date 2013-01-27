@@ -1,12 +1,3 @@
-/*!
- * 
- *   melonJS
- *   http://www.melonjs.org
- *		
- *   Step by step game creation tutorial
- *
- **/
-
 // game resources
 var g_resources = [{
     name: "tiles_test",
@@ -20,25 +11,14 @@ var g_resources = [{
     name: "jelly_bean",
     type: "image",
     src: "data/sprite/jelly_bean.png"
-// the spinning coin spritesheet
-}, {
-    name: "spinning_coin_gold",
-    type: "image",
-    src: "data/sprite/spinning_coin_gold.png"
-// our enemty entity
 }];
 
 
 var jsApp	= 
 {	
-	/* ---
-	
-		Initialize the jsApp
-		
-		---			*/
+	/* Initialize the jsApp */
 	onload: function()
 	{
-		
 		// init the video
 		if (!me.video.init('jsapp', 640, 480, false, 1.0))
 		{
@@ -68,15 +48,14 @@ var jsApp	=
      
 	loaded: function ()
 	{
+	   var playerEntity = HowRetarded.getInstance().player.playerEntity;
+
 	   // set the "Play/Ingame" Screen Object
 	   me.state.set(me.state.PLAY, new PlayScreen());
 	     
 	   // add our player entity in the entity pool
-	   me.entityPool.add("mainPlayer", PlayerEntity);
+	   me.entityPool.add("mainPlayer", playerEntity );
 
-	   // add gold coins entity in the entity pool
-	   me.entityPool.add("CoinEntity", CoinEntity);
-	             
 	   // enable the keyboard
 	   me.input.bindKey(me.input.KEY.LEFT,  "left");
 	   me.input.bindKey(me.input.KEY.RIGHT, "right");
@@ -88,6 +67,7 @@ var jsApp	=
 	      
 	   // start the game
 	   me.state.change(me.state.PLAY);
+
 	}
 
 }; // jsApp
@@ -99,7 +79,7 @@ var PlayScreen = me.ScreenObject.extend(
    onResetEvent: function()
 	{	
       // stuff to reset on state change
-    	me.levelDirector.loadLevel("area01");
+		me.levelDirector.loadLevel("area01");
 	},
 	
 	
@@ -116,28 +96,14 @@ var PlayScreen = me.ScreenObject.extend(
 });
 
 
-/*----------------
- a Coin entity
------------------------- */
-var CoinEntity = me.CollectableEntity.extend({
-    // extending the init function is not mandatory
-    // unless you need to add some extra initialization
-    init: function(x, y, settings) {
-        // call the parent constructor
-        this.parent(x, y, settings);
-    },
- 
-    // this function is called by the engine, when
-    // an object is touched by something (here collected)
-    onCollision: function() {
-        // do something when collected
-    }
- 
-});
+
 
 
 //bootstrap :)
 window.onReady(function() 
 {
 	jsApp.onload();
+	HowRetarded.getInstance().init();
 });
+
+
