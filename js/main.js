@@ -11,6 +11,18 @@ var g_resources = [{
     name: "jelly_bean",
     type: "image",
     src: "data/sprite/jelly_bean.png"
+}, {
+    name: "jelly_bean2",
+    type: "image",
+    src: "data/sprite/jelly_bean2.png"
+}, {
+    name: "jelly_bean3",
+    type: "image",
+    src: "data/sprite/jelly_bean3.png"
+}, {
+    name: "jelly_bean4",
+    type: "image",
+    src: "data/sprite/jelly_bean4.png"
 }];
 
 
@@ -48,25 +60,27 @@ var jsApp	=
      
 	loaded: function ()
 	{
-	   var playerEntity = HowRetarded.getInstance().player.playerEntity;
+		var game = HowRetarded.getInstance();
+		// set the "Play/Ingame" Screen Object
+		me.state.set(me.state.PLAY, new PlayScreen());
 
-	   // set the "Play/Ingame" Screen Object
-	   me.state.set(me.state.PLAY, new PlayScreen());
-	     
-	   // add our player entity in the entity pool
-	   me.entityPool.add("mainPlayer", playerEntity );
+		for (var i=0; i<game.nbPlayers; ++i){
+			var playerEntity = game.players[i].playerEntity;
+			// add our player entity in the entity pool
+			me.entityPool.add("player"+(i+1), playerEntity );
+		}		
+		
+		// enable the keyboard
+		me.input.bindKey(me.input.KEY.LEFT,  "left");
+		me.input.bindKey(me.input.KEY.RIGHT, "right");
+		me.input.bindKey(me.input.KEY.UP,  "up");
+		me.input.bindKey(me.input.KEY.DOWN, "down");
 
-	   // enable the keyboard
-	   me.input.bindKey(me.input.KEY.LEFT,  "left");
-	   me.input.bindKey(me.input.KEY.RIGHT, "right");
-	   me.input.bindKey(me.input.KEY.UP,  "up");
-	   me.input.bindKey(me.input.KEY.DOWN, "down");
-
-	   //see the boundingBox
-	   //me.debug.renderHitBox = true;
-	      
-	   // start the game
-	   me.state.change(me.state.PLAY);
+		//see the boundingBox
+		//me.debug.renderHitBox = true;
+		  
+		// start the game
+		me.state.change(me.state.PLAY);
 
 	}
 

@@ -8,7 +8,7 @@ function Action(force) {
 			this.type = 4;
 		}
 	}else{
-		this.type = Math.floor(Math.random()*4) - charisme;
+		this.type = Math.floor(Math.random()*4);
 	}
 
 	this.definirNom();

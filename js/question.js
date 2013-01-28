@@ -3,6 +3,7 @@ function Question(type) {
 	this.definirQuestion(type);
 	this.pointsComp = 2;
 	this.pointsCar = 2;
+    this.game = HowRetarded.getInstance();
 }
 
 Question.prototype.definirQuestion = function(type) {    
@@ -22,14 +23,17 @@ Question.prototype.afficherQuestion = function(type) {
 Question.prototype.repondre = function(idReponse, maison) {
 	if (maison){    
     	if (idReponse == this.bonneReponse){
-    		//le joueur obtient la maison
+            //le joueur obtient la maison
+    		this.game.getFocusedPlayer().gagnerMaison(this.type);
         }
     	else{
     		//le joueur passe la main
+            this.game.nextPlayer()
     	}
     }else{
     	if (idReponse == this.bonneReponse){
             //le joueur obtient les points
+            this.game.getFocusedPlayer().obtenirPoints( this.pointsComp, this.pointsCar) ;
         }    		
     	else{
     		if (this.pointsCar == 2 ){
