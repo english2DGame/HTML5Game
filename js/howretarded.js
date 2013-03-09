@@ -10,7 +10,7 @@ function HowRetarded() {
   this.nbMaisons = 3;
 }  
 
-HowRetarded.prototype.init = function(type) {    
+HowRetarded.prototype.init = function() {    
     this.plateau = new Plateau();
     //recuperer le nombre de joueurs, pour l'instant 2
     this.players = new Array;
@@ -18,6 +18,8 @@ HowRetarded.prototype.init = function(type) {
       this.players.push( new Player() );
     }
     this.players[0].focused = true;
+
+
 }
 
 

@@ -111,13 +111,14 @@ var PlayScreen = me.ScreenObject.extend(
 
 
 
-
+var code;
 
 //bootstrap :)
 window.onReady(function() 
 {
-	jsApp.onload();
-	HowRetarded.getInstance().init();
+	jsApp.onload();	
+	HowRetarded.getInstance().init();    
+
 });
 
 
