@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<questions>
+	<question type="1" r1="fresh cream" r2="parmesan" r3="lardon" r4="egg">Which one of those ingredients is not taking part of the original Carbonara recipe ? (italian recipe)</question>
+	<question type="1" r1="Beer" r2="Wine" r3="Whisky" r4="Gin">Which drink is often included in crepe batter ?</question>
+	<question type="1" r1="Rice" r2="Corn" r3="Wheat" r4="Barley">What is the most cultivated cereal in the world?</question>
+	<question type="1" r1="Fajitas" r2="Paella" r3="Tortilla" r4="Chili con carne">Which one is a typical Mexican meal?</question>
+	<question type="1" r1="Potato Chips" r2="His grand-ma’s cookies" r3="Pretzels" r4="Shrimp chips">What snack food did a University of South Florida engineering professor spend six years studying the crunch of?</question>
+	<question type="2" r1="oleander" r2="hibiscus" r3="orchid" r4="rhododendron">Which one of those plant has toxic leaves ?</question>
+	<question type="2" r1="Cress" r2="Apple" r3="Mapple" r4="Walnut">What is the common word for the Barbarea Verna ?</question>
+	<question type="2" r1="Chrysanthemum" r2="Daisy" r3="Lotus" r4="Thistle">What flower would you usually offer for a funeral ?</question>
+	<question type="2" r1="Nettle" r2="Anise" r3="Chives" r4="Thyme">Which of the following is not an aromatic plant ?</question>
+	<question type="2" r1="Chamomile" r2="Cactus" r3="Rose" r4="Violet">Which plant is known to be a muscle relaxant ?</question>
+	<question type="3" r1="1962" r2="1965" r3="1968" r4="1971">When the Rolling Stones have been created ?</question>
+	<question type="3" r1="Akon" r2="Jay-Z" r3="Dr Dre" r4="Timbaland">Who is Lady Gaga’s producer ?</question>
+	<question type="3" r1="Marshall" r2="Stanley" r3="Andrew" r4="Steven">What is Eminem’s real first name ?</question>
+	<question type="3" r1="Brian Jones" r2="Mick Jagger" r3="Ian Stewart" r4="Keith Richards">Who is the original leader of Rolling Stones ?</question>
+	<question type="3" r1="36" r2="32" r3="42" r4="46">How old was Bob Marley when he died ?</question>
+	<question type="4" r1="Outsiders" r2="A Nightmare on Elm Street (Freddy chapter 1)" r3="Platoon" r4="Cry-Baby">In which one of those films Johnny Depp didn't play ?</question>
+	<question type="4" r1="Cronenberg" r2="Spiellberg" r3="Hitchcock" r4="Ridley Scott">Who realised “The Fly” in 1986 ?</question>
+	<question type="4" r1="Requiem for a dream" r2="Fight Club" r3="Scarface" r4="Blow">In which film the main character loses his arm ?</question>
+	<question type="4" r1="Star Wars" r2="The Lord of the Rings" r3="Harry Potter" r4="The green Mile">Which of these movies or saga doesn’t come from a novel ?</question>
+	<question type="4" r1="Megan Fox" r2="Halle Berry" r3="Sophie Marceau" r4="Eva Green">Which actress has never been a James Bond girl ?</question>
+	<question type="5" r1="petanque" r2="soccer" r3="athletics" r4="kite-flying">Which is the national sport in Madagascar ?</question>
+	<question type="5" r1="7" r2="5" r3="6" r4="8">How many players are on a handball team ?</question>
+	<question type="5" r1="Toulouse" r2="Leinster" r3="Munster" r4="Leicester">In rugby, which team is the most titled in H-cup ?</question>
+	<question type="5" r1="yard" r2="meter" r3="foot" r4="inch">Which is the unit of measure on an American soccer field ?</question>
+	<question type="5" r1="Arsenal" r2="Marseille" r3="Chelsea" r4="FC Porto">Who of these football teams never won the Champion’s League ?</question>
+	<question type="6" r1="7" r2="5" r3="6" r4="8">How many different shapes are there in the original Tetris game ?</question>
+	<question type="6" r1="Link" r2="Spyro" r3="Jack" r4="Clad">Who is supposed to save princess Zelda ?</question>
+	<question type="6" r1="a gunblade" r2="a sword" r3="a knife" r4=" a hammer">In Final Fantasy 8, what kind of weapon does the main character Squall have ?</question>
+	<question type="6" r1="Rings" r2="Diamonds" r3="Money" r4="Stars">What does Sonic have to collect ?</question>
+	<question type="6" r1="Régis" r2="Gerard" r3="Timmy" r4="Zell">Who is Sasha’s rival in first generation of pokemon ?</question>	
+</questions>

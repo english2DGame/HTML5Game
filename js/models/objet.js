@@ -1,5 +1,5 @@
-function Objet(charisme) {
-	this.type = Math.floor(Math.random()*9) - charisme;
+function Objet() {
+	this.type = Math.floor(Math.random()*9);
 	this.definirNom();
 }
 

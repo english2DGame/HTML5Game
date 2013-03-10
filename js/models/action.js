@@ -1,16 +1,5 @@
-function Action(force) {
-	if (force >= 10){
-		var random = Math.random();
-		if (random > 0.25){
-			//le joueur choisit le type de déplacement
-		}
-		else{
-			this.type = 4;
-		}
-	}else{
-		this.type = Math.floor(Math.random()*4);
-	}
-
+function Action() {
+	this.type = Math.floor(Math.random()*4);
 	this.definirNom();
 }
 

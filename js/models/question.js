@@ -1,28 +1,40 @@
-function Question(type) {
+function Question(type, label, answers) {
 	this.type = type;
-	this.definirQuestion(type);
+    this.label = label;
+    this.answers = answers;
+    this.inHouse = false;
 	this.pointsComp = 2;
 	this.pointsCar = 2;
     this.game = HowRetarded.getInstance();
 }
 
-Question.prototype.definirQuestion = function(type) {    
-    //selectionner la question dans la bdd en fonction de son type
-    /*
-    initialiser les variables*/    
-    this.texte = "Quelle est ta couleur preferee ?";
-    this.reponses = new Array("vert", "jaune", "bleu", "rouge");
-   	this.bonneReponse = 2;   	
 
+
+
+Question.prototype.displayQuestion = function() {
+    var content = '<p>'+this.label+'</p>\n<ul>';
+    for (var i=0; i<this.answers.length; ++i){
+        content += '<li>'+this.answers[i].label+'</li>';
+    }
+    content += '</ul>';
+
+
+    $("#display").html(content);
 }
 
-Question.prototype.afficherQuestion = function(type) {    
-    //a remplir
+
+Question.prototype.goodAnswerIndex = function() {
+    for (var i=0; i<this.answers.length; ++i){
+        if (this.answer[i].correct == true)
+            return i;
+    }
 }
 
-Question.prototype.repondre = function(idReponse, maison) {
-	if (maison){    
-    	if (idReponse == this.bonneReponse){
+
+
+Question.prototype.repondre = function(idReponse) {
+	if (this.inHouse){    
+    	if (idReponse == this.goodAnswer){
             //le joueur obtient la maison
     		this.game.getFocusedPlayer().gagnerMaison(this.type);
         }
@@ -31,7 +43,7 @@ Question.prototype.repondre = function(idReponse, maison) {
             this.game.nextPlayer()
     	}
     }else{
-    	if (idReponse == this.bonneReponse){
+    	if (idReponse == this.goodAnswer){
             //le joueur obtient les points
             this.game.getFocusedPlayer().obtenirPoints( this.pointsComp, this.pointsCar) ;
         }    		
@@ -56,17 +68,15 @@ Question.prototype.repondre = function(idReponse, maison) {
 }
 
 Question.prototype.verifierReponse = function(idReponse, maison) {
-	return idReponse == this.bonneReponse;
+	return idReponse == this.goodAnswer;
 }
 
 Question.prototype.enleverReponse = function() {    
-	var random = this.bonneReponse;
-	while (random == this.bonneReponse)
-		random = Math.floor(Math.random()*this.reponses.length);
+	var random = this.goodAnswerIndex();
+	while (random == this.goodAnswerIndex())
+		random = Math.floor(Math.random()*this.answers.length);
+	this.answers.splice(random, 1);
 
-	this.reponses.splice(random, 1);
-	if (random < this.bonneReponse)
-		this.bonneReponse --;
 }
 
 
