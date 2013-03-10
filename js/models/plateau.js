@@ -47,7 +47,23 @@ function setQuestionByType(questions, type) {
     return typedQuestions[random];
 }
 
-
+function getNameType(type) {
+    switch(type)
+    {
+        case 1:
+          return "cooking";
+        case 2:
+          return "gardening";
+        case 3:
+          return "movies";
+        case 4:
+          return "music";
+        case 5:
+          return "sport"; 
+        case 6:
+          return "videogames";
+    } 
+}
 
 
 

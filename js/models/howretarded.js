@@ -5,7 +5,8 @@ function HowRetarded() {
 
   //nombre de maisons necessaires pour fusee (pour l'instant 3)
   this.nbMaisons = 3;
-  this.questions = new Array
+  this.questions = new Array;
+  this.currentQuestion = null;
 }  
 
 
@@ -54,6 +55,7 @@ HowRetarded.prototype.init = function(players) {
     this.players = players;
     this.players[3].focused = true;
     this.players[3].lancerDe();
+    this.displayBasicInformations(this.players[3])
 }
 
 
@@ -71,25 +73,26 @@ HowRetarded.prototype.setCaseAction = function(type) {
   if (type == 1 || type == 2){
     var rand = Math.random();
     if (rand < 0.75){
-      console.log("question")
+      $("#display #actus_jeu .last_event").html("New question. Click on an answer.");
       var question = setQuestionByType(this.questions, Math.floor(Math.random()*4)+1 );
+      this.setCurrentQuestion(question);
       question.displayQuestion();
     }else{
         var randEvent = Math.floor(Math.random()*5)+1;
         switch(randEvent){
           case 1:
-            console.log("coup de boule");
+            $("#display #actus_jeu .last_event").html("Kick butt. Go back where you come from !!");
             player.caseX = player.lastCaseX;
             player.caseY = player.lastCaseY;
             var typeCase = getCaseType(player.caseX, player.caseY)
             this.setCaseAction(typeCase);
             break;
           case 2:
-            console.log("coup de pied au cul");
+            $("#display #actus_jeu .last_event").html("Head-butt. You've got "+player.lastdice+" new movings.");
             player.dice = player.lastdice
             break;
           case 3:
-            console.log("pousse-pousse");
+            $("#display #actus_jeu .last_event").html("Rickshaw. Move randomly");
             var typeCase=0
             var randX;
             var randY;
@@ -103,14 +106,15 @@ HowRetarded.prototype.setCaseAction = function(type) {
             this.setCaseAction(typeCase);
             break;
           case 4:
-            console.log("objet");
+            $("#display #actus_jeu .last_event").html("You've got a new secret object");
             player.object = new Object();
-            this.nextPlayer();
+            document.getElementById("next_player").style.display = 'block';
             break;
           case 5:
-            console.log("bavette");
+            $("#display #actus_jeu .last_event").html("Chatter spot. You'll pass next turn");
             player.passeProchainTour = true;
             var question = setQuestionByType(this.questions, Math.floor(Math.random()*4)+1 );
+            this.setCurrentQuestion(question);
             question.displayQuestion();
             break;
         };
@@ -118,15 +122,21 @@ HowRetarded.prototype.setCaseAction = function(type) {
     }
   }else{
     if (type == 3 ){
-      console.log("fusee")
+      $("#display #actus_jeu .last_event").html("Are you ready to go to the Earth ??")
     }else{
-      console.log("question maison "+ type-3)
+      $("#display #actus_jeu .last_event").html("You're on the "+getNameType(type-3)+" house. Click on an answer.")
       var question = setQuestionByType(this.questions, type-3);
       question.inHouse = true;
+      this.setCurrentQuestion(question);
       question.displayQuestion();
     }
   }
 } 
+
+
+HowRetarded.prototype.setCurrentQuestion = function(question) {
+  this.currentQuestion = question  
+}
 
 
 HowRetarded.prototype.nextPlayer = function() {
@@ -152,11 +162,32 @@ HowRetarded.prototype.nextPlayer = function() {
     this.nextPlayer();
   }else{
     this.players[nextPlayer].lancerDe();
+    this.displayBasicInformations(this.players[nextPlayer])
   }
-
 }
 
-  
+
+HowRetarded.prototype.displayBasicInformations = function(cur) { 
+  var content1 = '<h1>Player informations</h1>\n<p>Actual player : </p><img src="'+cur.url+'"/>\n<p>Obtained houses : </p><ul class="houses">';
+
+  for (var i=1; i<7; ++i){
+    var url = 'img/'+getNameType(i)+'.png';
+    if ( !cur.wonHouse(i) )
+      url = 'img/'+getNameType(i)+'_d.png';
+    content1 += '<li class="'+getNameType(i)+'"><img src="'+url+'" /></li>'
+  }
+
+  content += '</ul>';
+
+
+  var content2 = '<h1>Game informations</h1>\n<p>Movings : <span class="dice">'+cur.dice+'</span></p>\n<p>Last event : <span class="last_event">You threw the dice and obtained '+cur.dice+'</span></p>\n<div class="question"></div>';
+    
+  $("#display #infos_joueur").html(content1);
+  $("#display #actus_jeu").html(content2);
+  document.getElementById("next_player").style.display = 'none';
+}
+
+ 
 // propriété statique qui contient l'instance unique  
 HowRetarded.instance = null;  
   

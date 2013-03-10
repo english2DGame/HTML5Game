@@ -2,15 +2,19 @@ function Player(imgPlayer, index) {
     switch(index){
         case 0:
             this.name = 'red';
+            this.url = 'img/persorouge.png'
             break;
         case 1:
             this.name = 'blue';
+            this.url = 'img/persobleu.png'
             break;
         case 2:
             this.name = 'yellow';
+            this.url = 'img/persojaune.png'
             break;
         case 3:
             this.name = 'green';
+            this.url = 'img/persovert.png'
             break;
     }
 
@@ -38,17 +42,17 @@ function Player(imgPlayer, index) {
 
       
     //type 1
-    this.maisonCuisine = false;
+    this.cookingHouse = false;
     //type 2
-    this.maisonJardin = false; 
+    this.gardeningHouse = false; 
     //type 3
-    this.maisonCinema = false; 
+    this.moviesHouse = false; 
     //type 4     
-    this.maisonMusique = false; 
+    this.musicHouse = false; 
     //type 5
-    this.maisonSport = false;
+    this.sportHouse = false;
     //type 6
-    this.maisonJV = false;    
+    this.videogamesHouse = false;    
     
 
     this.bmp = new createjs.Bitmap(imgPlayer);
@@ -65,31 +69,48 @@ Player.prototype.lancerDe = function(){
     this.lastdice = this.dice;
 }
 
-Player.prototype.gagnerMaison = function(type){ 
+Player.prototype.winHouse = function(type){ 
     switch(type)
     {
         case 1:
-          this.maisonCinema = true;
+          this.cookingHouse = true;
           break;
         case 2:
-          this.maisonCuisine = true;
+          this.gardeningHouse = true;
           break;
         case 3:
-          this.maisonJardin = true;
+          this.moviesHouse = true;
           break;
         case 4:
-          this.maisonJV = true;
+          this.musicHouse = true;
           break;
         case 5:
-          this.maisonMusique = true; 
+          this.sportHouse = true; 
           break;
         case 6:
-          this.maisonSport = true;
+          this.videogamesHouse = true;
           break;        
-        default:
-          break;
     } 
 }
+
+Player.prototype.wonHouse = function(type){ 
+    switch(type)
+    {
+        case 1:
+          return this.cookingHouse;
+        case 2:
+          return this.gardeningHouse;
+        case 3:
+          return this.moviesHouse;
+        case 4:
+          return this.musicHouse;
+        case 5:
+          return this.sportHouse; 
+        case 6:
+          return this.videogamesHouse;
+    } 
+}
+
 
 Player.prototype.obtenirPoints = function(pointsComp, pointsCar){ 
     this.pointsComp = pointsComp;

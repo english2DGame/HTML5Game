@@ -12,7 +12,6 @@ var player;
 var contentManager;
 
 
-var txt;
 
 
 function init() {
@@ -52,10 +51,6 @@ function startGame() {
       stage.addChild(p.bmp)      
     }
 
-    txt = new createjs.Text("", "bold 14px Arial", "#FFF");
-    stage.addChild(txt);
-
-
     var instance = HowRetarded.getInstance();
     instance.init(players);
     player = instance.getFocusedPlayer(); 
@@ -65,19 +60,14 @@ function startGame() {
 	createjs.Ticker.addListener(window);
     // Best Framerate targeted (60 FPS)
 	createjs.Ticker.useRAF = true;
-	createjs.Ticker.setFPS(60);
-
-    
-
-      
+	createjs.Ticker.setFPS(60);      
 }
+
 
 function tick() {
     player = HowRetarded.getInstance().getFocusedPlayer();
     player.bmp.x = player.caseX*50;
     player.bmp.y = player.caseY*50;
-
-    txt.text = "joueur actuel : "+player.name+ "\ndéplacements : "+player.dice
 
 	stage.update();
 }
@@ -93,7 +83,7 @@ function handleKeyDown(e) {
             case KEYCODE_LEFT:
                 if (player.caseX > 0){
                     type = getCaseType(player.caseX-1, player.caseY)
-                    if (type > 0){
+                    if (type > 0 ){
                         player.lastCaseX = player.caseX;
                         player.caseX --;
                         player.dice --;
@@ -103,7 +93,7 @@ function handleKeyDown(e) {
     		 case KEYCODE_RIGHT:
                 if (player.caseX < 20){
                     type = getCaseType(player.caseX+1, player.caseY)
-                    if (type > 0){
+                    if (type > 0 ){
                         player.lastCaseX = player.caseX;
                         player.caseX ++;
                         player.dice --;
@@ -113,7 +103,7 @@ function handleKeyDown(e) {
             case KEYCODE_DOWN:
                 if (player.caseX < 16){
                     type = getCaseType(player.caseX, player.caseY+1)
-                    if (type > 0){
+                    if (type > 0 ){
                         player.lastCaseY = player.caseY;
                         player.caseY ++;
                         player.dice --;
@@ -123,7 +113,7 @@ function handleKeyDown(e) {
             case KEYCODE_UP:
                 if (player.caseY > 0){
                     type = getCaseType(player.caseX, player.caseY-1)
-                    if (type > 0){
+                    if (type > 0 ){
                         player.lastCaseY = player.caseY;
                         player.caseY --;
                         player.dice --;
@@ -131,6 +121,8 @@ function handleKeyDown(e) {
                 }
                 break;
         }
+
+        $("#display #actus_jeu .dice").html(player.dice);
 
 
         if (player.dice == 0){
