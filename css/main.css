@@ -34,7 +34,6 @@ sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: b
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
 
-ul, ol { margin: 1em 0; padding: 0 0 0 40px; }
 dd { margin: 0 0 0 40px; }
 nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0; }
 li{ list-style: none;}
@@ -81,10 +80,17 @@ body {}
 
 
 /* Content */
-#content {}
+#content { width:1450px; }
+#content .canvasHolder{ width:1050px; float:left; }
+#content #display{ width:350px; float:left; padding-left:50px;}
+
+#infos_joueur .houses { height: 70px; padding:0; margin:0; }
+#infos_joueur .houses li{ float:left;}
 
 
 /* Footer */
 #footer {}
+
+
 
 
