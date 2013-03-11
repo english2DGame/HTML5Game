@@ -44,7 +44,8 @@ function setQuestionByType(questions, type) {
     }
 
     var random = Math.floor(Math.random()*typedQuestions.length);
-    return typedQuestions[random];
+
+    return typedQuestions[random] ;
 }
 
 function getNameType(type) {

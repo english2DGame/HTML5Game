@@ -26,10 +26,10 @@ HowRetarded.prototype.loadQuestions = function() {
     var elts = xmlDoc.getElementsByTagName("question")
     for(var i=0; i<elts.length; ++i){
         var type = elts[i].getAttribute("type");
-        var r1 = new Answer(elts[i].getAttribute("r1"), true);
-        var r2 = new Answer(elts[i].getAttribute("r2"), false);
-        var r3 = new Answer(elts[i].getAttribute("r3"), false);
-        var r4 = new Answer(elts[i].getAttribute("r4"), false);
+        var r1 = new Answer(elts[i].getAttribute("r1"), true, true);
+        var r2 = new Answer(elts[i].getAttribute("r2"), false, true);
+        var r3 = new Answer(elts[i].getAttribute("r3"), false, true);
+        var r4 = new Answer(elts[i].getAttribute("r4"), false, true);
 
         var label = elts[i].textContent;
 
@@ -72,7 +72,7 @@ HowRetarded.prototype.setCaseAction = function(type) {
 
   if (type == 1 || type == 2){
     var rand = Math.random();
-    if (rand < 0.75){
+    if (rand < 0.70){
       $("#display #actus_jeu .last_event").html("New question. Click on an answer.");
       var question = setQuestionByType(this.questions, Math.floor(Math.random()*4)+1 );
       this.setCurrentQuestion(question);
@@ -89,6 +89,7 @@ HowRetarded.prototype.setCaseAction = function(type) {
             break;
           case 2:
             $("#display #actus_jeu .last_event").html("Head-butt. You've got "+player.lastdice+" new movings.");
+             $("#display #actus_jeu .dice").html(player.lastdice);
             player.dice = player.lastdice
             break;
           case 3:
@@ -140,6 +141,12 @@ HowRetarded.prototype.setCurrentQuestion = function(question) {
 
 
 HowRetarded.prototype.nextPlayer = function() {
+  //on remet toutes les réponses a true
+  for(var i=0; i<this.questions.length; ++i){
+    for (var j=0; j<this.questions[i].answers.length; ++j)
+      this.questions[i].answers[j].visible = true;
+  }
+
   var index, nextPlayer;
 
   for (var i=0; i<this.players.length; ++i){

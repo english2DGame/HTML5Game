@@ -12,7 +12,8 @@ function Question(type, label, answers) {
 Question.prototype.displayQuestion = function() {
     var content = '<p>'+this.label+'</p>\n<ul>';
     for (var i=0; i<this.answers.length; ++i){
-        content += '<li><a style="cursor:pointer;" onclick="HowRetarded.getInstance().currentQuestion.repondre('+i+');">'+this.answers[i].label+'</a></li>';
+        if (this.answers[i].visible)
+            content += '<li id="answer'+i+'" style="display:block;"><a style="cursor:pointer;" onclick="HowRetarded.getInstance().currentQuestion.repondre('+i+');">'+this.answers[i].label+'</a></li>';
     }
     content += '</ul>';
 
@@ -37,7 +38,8 @@ Question.prototype.repondre = function(idReponse) {
             var p = this.game.getFocusedPlayer()
     		if ( !p.wonHouse(type) ){
                 p.winHouse(type);
-                $("#display #actus_jeu .last_event").html("You won the "+getNameType(type)+" house !!"); 
+                $("#display #actus_jeu .last_event").html("You won the "+getNameType(type)+" house !!");
+                $("#display #actus_jeu .question").html('');
                 document.getElementById("next_player").style.display = 'block';
                 var url = 'img/'+getNameType(type)+'.png'
                 $("#infos_joueur ."+getNameType(type)+" img").attr('src',url);
@@ -55,27 +57,22 @@ Question.prototype.repondre = function(idReponse) {
     	if (idReponse == this.goodAnswerIndex()){
             $("#display #actus_jeu .last_event").html("That's a good answer. You get points !!");
             this.game.getFocusedPlayer().obtenirPoints( this.pointsComp, this.pointsCar) ;
+            $("#display #actus_jeu .question").html('');
             document.getElementById("next_player").style.display = 'block';
         }    		
     	else{
-    		if (this.pointsCar == 2 ){
-    			this.pointsCar -- ;
-    			this.pointsComp --;
+    		if (this.answers[0].visible + this.answers[1].visible + this.answers[2].visible + this.answers[3].visible > 2 ){
     			this.enleverReponse();
     			this.displayQuestion();
     		}else{
-    			if (this.pointsCar == 1 ){
-    				this.pointsCar -- ;
-    				this.enleverReponse();
-    				this.displayQuestion();
-    			}
-    			else{
-    				document.getElementById("next_player").style.display = 'block';
-    			}
-    		}
-    	}
-    }
+                $("#display #actus_jeu .last_event").html("You didn't find the good answer.");
+                $("#display #actus_jeu .question").html('');
+				document.getElementById("next_player").style.display = 'block';
+			}
+		}
+	}
 }
+
 
 Question.prototype.verifierReponse = function(idReponse, maison) {
 	return idReponse == this.goodAnswer;
@@ -83,9 +80,10 @@ Question.prototype.verifierReponse = function(idReponse, maison) {
 
 Question.prototype.enleverReponse = function() {    
 	var random = this.goodAnswerIndex();
-	while (random == this.goodAnswerIndex())
-		random = Math.floor(Math.random()*this.answers.length);
-	this.answers.splice(random, 1);
+	while (random == this.goodAnswerIndex() || !this.answers[random].visible)
+		random = Math.floor(Math.random()*4);
+
+	this.answers[random].visible = false;
     $("#display #actus_jeu .last_event").html("One answer has been removed");
 
 }
