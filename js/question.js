@@ -16,7 +16,7 @@ Question.prototype.definirQuestion = function(type) {
 
 }
 
-Question.prototype.afficherQuestion = function(type) {    
+Question.prototype.afficherQuestion = function() {    
     //a remplir
 }
 
