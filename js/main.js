@@ -55,10 +55,10 @@ function startGame() {
     instance.init(players);
     player = instance.getFocusedPlayer(); 
 
-    /*var audioElement = document.createElement('audio');
+    var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'data/son.ogg');
     audioElement.loop = true;
-    audioElement.play();*/
+    audioElement.play();
 
     // otherwise we could use Ticker.addListener(stage);
 	createjs.Ticker.addListener(window);

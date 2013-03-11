@@ -3,8 +3,9 @@ function Question(type, label, answers) {
     this.label = label;
     this.answers = answers;
     this.inHouse = false;
-	this.pointsComp = 2;
-	this.pointsCar = 2;
+    this.points = 4
+	//this.pointsComp = 2;
+	//this.pointsCar = 2;
     this.game = HowRetarded.getInstance();
 }
 
@@ -32,10 +33,11 @@ Question.prototype.goodAnswerIndex = function() {
 
 Question.prototype.repondre = function(idReponse) {
 	var type = Number(this.type)
+    var p = this.game.getFocusedPlayer()
 
     if (this.inHouse){    
     	if (idReponse == this.goodAnswerIndex()){
-            var p = this.game.getFocusedPlayer()
+            
     		if ( !p.wonHouse(type) ){
                 p.winHouse(type);
                 $("#display #actus_jeu .last_event").html("You won the "+getNameType(type)+" house !!");
@@ -50,18 +52,25 @@ Question.prototype.repondre = function(idReponse) {
             }
         }
     	else{
-    		$("#display #actus_jeu .last_event").html("Sorry, wrong answer");            
+    		$("#display #actus_jeu .last_event").html("Sorry, wrong answer");
+            $("#display #actus_jeu .question").html('');            
     	}
         document.getElementById("next_player").style.display = 'block';
     }else{
     	if (idReponse == this.goodAnswerIndex()){
-            $("#display #actus_jeu .last_event").html("That's a good answer. You get points !!");
-            this.game.getFocusedPlayer().obtenirPoints( this.pointsComp, this.pointsCar) ;
+            player.points += this.points
+            $("#display #actus_jeu .last_event").html("That's a good answer. You get "+this.points+" points !!");
+            $("#infos_joueur .points").html(p.points)
             $("#display #actus_jeu .question").html('');
             document.getElementById("next_player").style.display = 'block';
         }    		
     	else{
     		if (this.answers[0].visible + this.answers[1].visible + this.answers[2].visible + this.answers[3].visible > 2 ){
+                if (this.points == 4)
+                    this.points = 2;
+                else{
+                    this.points --;
+                }
     			this.enleverReponse();
     			this.displayQuestion();
     		}else{

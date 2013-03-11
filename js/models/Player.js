@@ -35,6 +35,7 @@ function Player(imgPlayer, index) {
     this.melomanie = 0;
     this.acrobate = 0;
     this.gamer = 0;
+    this.points = 0;
     this.pointsComp = 0;
     this.pointsCar = 0;
     this.objet = null;

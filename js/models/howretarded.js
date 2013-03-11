@@ -143,6 +143,7 @@ HowRetarded.prototype.setCurrentQuestion = function(question) {
 HowRetarded.prototype.nextPlayer = function() {
   //on remet toutes les réponses a true
   for(var i=0; i<this.questions.length; ++i){
+    this.questions[i].points = 4;
     for (var j=0; j<this.questions[i].answers.length; ++j)
       this.questions[i].answers[j].visible = true;
   }
@@ -184,7 +185,7 @@ HowRetarded.prototype.displayBasicInformations = function(cur) {
     content1 += '<li class="'+getNameType(i)+'"><img src="'+url+'" /></li>'
   }
 
-  content += '</ul>';
+  content1 += '</ul>\n<p>Score : <span class="points">'+cur.points+'</span></p>';
 
 
   var content2 = '<h1>Game informations</h1>\n<p>Movings : <span class="dice">'+cur.dice+'</span></p>\n<p>Last event : <span class="last_event">You threw the dice and obtained '+cur.dice+'</span></p>\n<div class="question"></div>';
